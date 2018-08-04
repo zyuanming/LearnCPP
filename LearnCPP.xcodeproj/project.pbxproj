@@ -58,12 +58,12 @@
 		60151332211567A30082F8BA /* Caculator */ = {
 			isa = PBXGroup;
 			children = (
+				60151338211567A30082F8BA /* Parser.cpp */,
 				60151333211567A30082F8BA /* Parser.hpp */,
 				60151334211567A30082F8BA /* Node.cpp */,
-				60151335211567A30082F8BA /* Scanner.cpp */,
 				60151336211567A30082F8BA /* Node.hpp */,
+				60151335211567A30082F8BA /* Scanner.cpp */,
 				60151337211567A30082F8BA /* Scanner.hpp */,
-				60151338211567A30082F8BA /* Parser.cpp */,
 				60151339211567A30082F8BA /* main.cpp */,
 			);
 			path = Caculator;

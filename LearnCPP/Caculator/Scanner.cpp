@@ -8,11 +8,18 @@
 
 #include "Scanner.hpp"
 #include <cctype>
+#include <iostream>
 
-Scanner::Scanner(const std::string& buf) : buf_(buf)
+Scanner::Scanner(const std::string& buf) : buf_(buf), curPos_(0), number_(0)
 {
     Accept();
 }
+
+Scanner::~Scanner()
+{
+    std::cout<<"Scanner deinit.."<<std::endl;
+}
+
 
 double Scanner::Number() const
 {

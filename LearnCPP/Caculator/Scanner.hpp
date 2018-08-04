@@ -28,6 +28,7 @@ enum EToken
 class Scanner {
 public:
     Scanner(const std::string& buf);
+    ~Scanner();
     void Accept();
     double Number() const;
     EToken Token() const;
