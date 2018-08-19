@@ -13,6 +13,7 @@
 Scanner::Scanner(const std::string& buf) : buf_(buf), curPos_(0), number_(0)
 {
     Accept();
+    isEmpty_ = (token_ == TOKEN_END);
 }
 
 Scanner::~Scanner()
@@ -20,6 +21,15 @@ Scanner::~Scanner()
     std::cout<<"Scanner deinit.."<<std::endl;
 }
 
+bool Scanner::IsEmpty() const
+{
+    return isEmpty_;
+}
+
+bool Scanner::IsDone() const
+{
+    return token_ == TOKEN_END;
+}
 
 double Scanner::Number() const
 {

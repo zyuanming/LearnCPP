@@ -48,7 +48,7 @@ class Parser {
 public:
     Parser(Scanner& scanner);
     ~Parser();
-    void Parse();
+    STATUS Parse();
     // 对表达式进行解析
     Node* Expr();
     Node* Term();

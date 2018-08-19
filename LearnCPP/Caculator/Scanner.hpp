@@ -30,6 +30,8 @@ public:
     Scanner(const std::string& buf);
     ~Scanner();
     void Accept();
+    bool IsEmpty() const;
+    bool IsDone() const;
     double Number() const;
     EToken Token() const;
 private:
@@ -38,6 +40,7 @@ private:
     unsigned int curPos_;
     EToken token_;
     double number_;
+    bool isEmpty_;
 };
 
 #endif /* Scanner_hpp */

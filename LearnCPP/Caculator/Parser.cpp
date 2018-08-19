@@ -12,7 +12,7 @@
 #include <cassert>
 #include <iostream>
 
-Parser::Parser(Scanner& scanner) : scanner_(scanner), tree_(0)
+Parser::Parser(Scanner& scanner) : scanner_(scanner), tree_(0), status_(STATUS_OK)
 {
     
 }
@@ -22,9 +22,14 @@ Parser::~Parser()
     std::cout<<"Parser deinit.."<<std::endl;
 }
 
-void Parser::Parse()
+STATUS Parser::Parse()
 {
     tree_ = Expr();
+    if (!scanner_.IsDone())
+    {
+        status_ = STATUS_ERROR;
+    }
+    return status_;
 }
 
 Node* Parser::Expr()

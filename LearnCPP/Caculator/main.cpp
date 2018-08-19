@@ -13,7 +13,7 @@
 
 int main(void)
 {
-    STATUS status = STATUS_OK;
+    STATUS status;
     do
     {
         std::cout<<"> ";
@@ -21,9 +21,25 @@ int main(void)
         std::getline(std::cin, buf);
 //        std::cout<<buf<<std::endl;
         Scanner scanner(buf);
-        Parser parser(scanner);
-        parser.Parse();
-        std::cout<<parser.Calculate()<<std::endl;
+        if (!scanner.IsEmpty())
+        {
+            Parser parser(scanner);
+            status = parser.Parse();
+            if (status == STATUS_OK)
+            {
+                std::cout<<parser.Calculate()<<std::endl;
+            }
+            else
+            {
+                std::cout<<"Syntax Error."<<std::endl;
+            }
+            
+        }
+        else
+        {
+            std::cout<<"Expression is empty."<<std::endl;
+        }
+        
     } while(status != STATUS_QUIT);
     
     return 0;
