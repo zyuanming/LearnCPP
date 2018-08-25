@@ -12,6 +12,7 @@
 #include "Node.hpp"
 #include <cassert>
 #include <iostream>
+#include "Exception.hpp"
 
 Parser::Parser(Scanner& scanner, Calc& calc) : scanner_(scanner), calc_(calc), tree_(0), status_(STATUS_OK)
 {
@@ -75,8 +76,9 @@ Node* Parser::Expr()
             node = new AssignNode(node, nodeRight);
         } else {
             status_ = STATUS_ERROR;
-            std::cout<<"The left-hand side of an assignment must be a variable"<<std::endl;
+//            std::cout<<"The left-hand side of an assignment must be a variable"<<std::endl;
             // TODO throw exception
+            throw SyntaxError("The left-hand side of an assignment must be a variable.");
         }
     }
     
@@ -133,9 +135,7 @@ Node* Parser::Factor()
         else
         {
             status_ = STATUS_ERROR;
-            // TODO: throw exception
-            std::cout<<"missing right parenthesis"<<std::endl;
-            node = 0;
+            throw SyntaxError("Missing right parenthesis.");
         }
     }
     else if (token == TOKEN_NUMBER)
@@ -163,13 +163,15 @@ Node* Parser::Factor()
                 else
                 {
                     status_ = STATUS_ERROR;
-                    std::cout<<"Unknown function"<<"\""<<symbol<<"\""<<std::endl;
+                    char buf[256] = {0};
+                    sprintf(buf, "Unknown function \"%s\".", symbol.c_str());
+                    throw SyntaxError(buf);
                 }
             }
             else
             {
                 status_ = STATUS_ERROR;
-                std::cout<<"Missing parenthesis in a function call."<<std::endl;
+                throw SyntaxError("Missing parenthesis in a function call.");
             }
         } else {
             
@@ -188,9 +190,7 @@ Node* Parser::Factor()
     }
     else {
         status_ = STATUS_ERROR;
-        // TODO: throw exception
-        std::cout<<"not a valid expression"<<std::endl;
-        node = 0;
+        throw SyntaxError("Not a valid expression.");
     }
     return node;
 }

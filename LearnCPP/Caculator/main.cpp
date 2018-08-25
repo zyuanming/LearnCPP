@@ -11,6 +11,7 @@
 #include "Scanner.hpp"
 #include "Parser.hpp"
 #include "Calc.hpp"
+#include "Exception.hpp"
 
 int main(void)
 {
@@ -26,14 +27,19 @@ int main(void)
         if (!scanner.IsEmpty())
         {
             Parser parser(scanner, calc);
-            status = parser.Parse();
-            if (status == STATUS_OK)
-            {
-                std::cout<<parser.Calculate()<<std::endl;
-            }
-            else
-            {
-                std::cout<<"Syntax Error."<<std::endl;
+            try {
+                status = parser.Parse();
+                if (status == STATUS_OK)
+                {
+                    std::cout<<parser.Calculate()<<std::endl;
+                }
+            } catch (SyntaxError& se) {
+                std::cout<<se.what()<<std::endl;
+//                std::cout<<se.StackTrace()<<std::endl;
+            } catch (Exception& e) {
+                std::cout<<e.what()<<std::endl;
+            } catch(...) {
+                std::cout<<"Internal error."<<std::endl;
             }
         }
         else

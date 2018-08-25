@@ -9,6 +9,7 @@
 #include "SymbolTable.hpp"
 #include <algorithm>
 #include <iostream>
+#include "Exception.hpp"
 
 unsigned int SymbolTable::Add(const std::string& str)
 {
@@ -52,8 +53,7 @@ std::string SymbolTable::GetSymbolName(unsigned int id) const
     std::map<const std::string, unsigned int>::const_iterator it;
     it = find_if(dictionary_.begin(), dictionary_.end(), IsEqualId(id));
     if (it == dictionary_.end()) {
-        std::cout<<"not found symbol"<<std::endl;
-        return "";
+        throw Exception("Internal error: missing entry in symbol table.");
     } else {
         return it->first;
     }
