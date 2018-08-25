@@ -33,6 +33,7 @@ public:
     bool IsEmpty() const;
     bool IsDone() const;
     double Number() const;
+    std::string GetSymbol() const;
     EToken Token() const;
 private:
     void SkipWhite();
@@ -41,6 +42,7 @@ private:
     EToken token_;
     double number_;
     bool isEmpty_;
+    std::string symbol_;
 };
 
 #endif /* Scanner_hpp */

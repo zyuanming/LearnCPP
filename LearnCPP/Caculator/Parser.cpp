@@ -8,18 +8,19 @@
 
 #include "Parser.hpp"
 #include "Scanner.hpp"
+#include "Calc.hpp"
 #include "Node.hpp"
 #include <cassert>
 #include <iostream>
 
-Parser::Parser(Scanner& scanner) : scanner_(scanner), tree_(0), status_(STATUS_OK)
+Parser::Parser(Scanner& scanner, Calc& calc) : scanner_(scanner), calc_(calc), tree_(0), status_(STATUS_OK)
 {
     
 }
 
 Parser::~Parser()
 {
-    std::cout<<"Parser deinit.."<<std::endl;
+
 }
 
 STATUS Parser::Parse()
@@ -64,6 +65,19 @@ Node* Parser::Expr()
         } while(token == TOKEN_PLUS || token == TOKEN_MINUS);
         
         node = multipleNode;
+    }
+    else if (token == TOKEN_ASSIGN)
+    {
+        // Expr := Term = Expr
+        scanner_.Accept();
+        Node* nodeRight = Expr();
+        if (node->IsLvalue()) {
+            node = new AssignNode(node, nodeRight);
+        } else {
+            status_ = STATUS_ERROR;
+            std::cout<<"The left-hand side of an assignment must be a variable"<<std::endl;
+            // TODO throw exception
+        }
     }
     
     return node;
@@ -128,6 +142,44 @@ Node* Parser::Factor()
     {
         node = new NumberNode(scanner_.Number());
         scanner_.Accept();
+    }
+    else if (token == TOKEN_IDENTIFIER)
+    {
+        std::string symbol = scanner_.GetSymbol();
+        unsigned int id = calc_.FindSymbol(symbol);
+        scanner_.Accept();
+        
+        if (scanner_.Token() == TOKEN_LPARENTHESIS) {
+            scanner_.Accept();
+            node = Expr();
+            if (scanner_.Token() == TOKEN_RPARENTHESIS)
+            {
+                scanner_.Accept();
+                
+                if (id != SymbolTable::IDNOTFOUND && calc_.IsFunction(id))
+                {
+                    node = new FunctionNode(node, calc_.GetFunction(id));
+                }
+                else
+                {
+                    status_ = STATUS_ERROR;
+                    std::cout<<"Unknown function"<<"\""<<symbol<<"\""<<std::endl;
+                }
+            }
+            else
+            {
+                status_ = STATUS_ERROR;
+                std::cout<<"Missing parenthesis in a function call."<<std::endl;
+            }
+        } else {
+            
+            if (id == SymbolTable::IDNOTFOUND)
+            {
+                id = calc_.AddSymbol(symbol);
+            }
+            
+            node = new VariableNode(id, calc_.GetStorage());
+        }
     }
     else if (token == TOKEN_MINUS)
     {

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F035FD1212F037D0080D0ED /* SymbolTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F035FCF212F037D0080D0ED /* SymbolTable.cpp */; };
+		1F035FD4212F087C0080D0ED /* Storage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F035FD2212F087C0080D0ED /* Storage.cpp */; };
+		1F29AD5921314B75006F1A44 /* Calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F29AD5721314B75006F1A44 /* Calc.cpp */; };
+		1F29AD5C213159FE006F1A44 /* FunctionTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F29AD5A213159FE006F1A44 /* FunctionTable.cpp */; };
 		6015133A211567A30082F8BA /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60151334211567A30082F8BA /* Node.cpp */; };
 		6015133B211567A30082F8BA /* Scanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60151335211567A30082F8BA /* Scanner.cpp */; };
 		6015133C211567A30082F8BA /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60151338211567A30082F8BA /* Parser.cpp */; };
@@ -26,6 +30,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F035FCF212F037D0080D0ED /* SymbolTable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SymbolTable.cpp; sourceTree = "<group>"; };
+		1F035FD0212F037D0080D0ED /* SymbolTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SymbolTable.hpp; sourceTree = "<group>"; };
+		1F035FD2212F087C0080D0ED /* Storage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Storage.cpp; sourceTree = "<group>"; };
+		1F035FD3212F087C0080D0ED /* Storage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Storage.hpp; sourceTree = "<group>"; };
+		1F29AD5721314B75006F1A44 /* Calc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Calc.cpp; sourceTree = "<group>"; };
+		1F29AD5821314B75006F1A44 /* Calc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Calc.hpp; sourceTree = "<group>"; };
+		1F29AD5A213159FE006F1A44 /* FunctionTable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FunctionTable.cpp; sourceTree = "<group>"; };
+		1F29AD5B213159FE006F1A44 /* FunctionTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FunctionTable.hpp; sourceTree = "<group>"; };
 		60151333211567A30082F8BA /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		60151334211567A30082F8BA /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		60151335211567A30082F8BA /* Scanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scanner.cpp; sourceTree = "<group>"; };
@@ -65,6 +77,14 @@
 				60151335211567A30082F8BA /* Scanner.cpp */,
 				60151337211567A30082F8BA /* Scanner.hpp */,
 				60151339211567A30082F8BA /* main.cpp */,
+				1F035FCF212F037D0080D0ED /* SymbolTable.cpp */,
+				1F035FD0212F037D0080D0ED /* SymbolTable.hpp */,
+				1F035FD2212F087C0080D0ED /* Storage.cpp */,
+				1F035FD3212F087C0080D0ED /* Storage.hpp */,
+				1F29AD5721314B75006F1A44 /* Calc.cpp */,
+				1F29AD5821314B75006F1A44 /* Calc.hpp */,
+				1F29AD5A213159FE006F1A44 /* FunctionTable.cpp */,
+				1F29AD5B213159FE006F1A44 /* FunctionTable.hpp */,
 			);
 			path = Caculator;
 			sourceTree = "<group>";
@@ -141,10 +161,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F29AD5C213159FE006F1A44 /* FunctionTable.cpp in Sources */,
 				6015133B211567A30082F8BA /* Scanner.cpp in Sources */,
+				1F29AD5921314B75006F1A44 /* Calc.cpp in Sources */,
 				6015133C211567A30082F8BA /* Parser.cpp in Sources */,
 				6015133D211567A30082F8BA /* main.cpp in Sources */,
+				1F035FD4212F087C0080D0ED /* Storage.cpp in Sources */,
 				6015133A211567A30082F8BA /* Node.cpp in Sources */,
+				1F035FD1212F037D0080D0ED /* SymbolTable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

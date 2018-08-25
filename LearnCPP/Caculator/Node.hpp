@@ -8,7 +8,13 @@
 
 #ifndef Node_hpp
 #define Node_hpp
+
+#include "FunctionTable.hpp"
 #include <vector>
+#include <cassert>
+
+
+class Storage;
 
 class Noncopyable
 {
@@ -31,6 +37,14 @@ class Node: private Noncopyable
 {
 public:
     virtual double Calc() const = 0;
+    virtual bool IsLvalue() const
+    {
+        return false;
+    }
+    virtual void Assign(double)
+    {
+        assert(!"Assign called incorrectlly.");
+    }
     virtual ~Node() {};
 };
 
@@ -65,6 +79,19 @@ public:
 protected:
     Node* const child_;
 };
+
+
+class FunctionNode : public UnaryNode
+{
+public:
+    FunctionNode(Node* child, PtrFun pFun) : UnaryNode(child), pFun_(pFun) {}
+    double Calc() const;
+private:
+    PtrFun pFun_;
+};
+
+
+
 
 class AddNode : public BinaryNode
 {
@@ -142,6 +169,29 @@ public:
     ProductNode(Node* node) : MultipleNode(node) {}
     double Calc() const;
 };
+
+
+class VariableNode: public Node
+{
+public:
+    VariableNode(unsigned int id, Storage& storage) : id_(id), storage_(storage) {}
+    double Calc() const;
+    bool IsLvalue() const;
+    void Assign(double val);
+private:
+    const unsigned int id_;
+    Storage& storage_;
+};
+
+class AssignNode : public BinaryNode
+{
+public:
+    AssignNode(Node* left, Node* right) : BinaryNode(left, right) {
+        assert(left->IsLvalue());
+    }
+    double Calc() const;
+};
+
 
 
 #endif /* Node_hpp */

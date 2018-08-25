@@ -11,6 +11,7 @@
 #include <cmath>
 #include <vector>
 #include <cassert>
+#include "Storage.hpp"
 
 double NumberNode::Calc() const
 {
@@ -55,6 +56,11 @@ double DivideNode::Calc() const
         std::cout<<"Error: Divisor by zero"<<std::endl;
         return HUGE_VAL;
     }
+}
+
+double FunctionNode::Calc() const
+{
+    return (*pFun_)(child_->Calc());
 }
 
 
@@ -128,6 +134,42 @@ double ProductNode::Calc() const
     
     return result;
 }
+
+
+
+double VariableNode::Calc() const
+{
+    double x = 0.0;
+    if (storage_.IsInit(id_)) {
+        x = storage_.GetValue(id_);
+    } else {
+        std::cout<<"Use of uninitialized variable."<<std::endl;
+    }
+    
+    return x;
+}
+
+bool VariableNode::IsLvalue() const
+{
+    return true;
+}
+
+void VariableNode::Assign(double val)
+{
+    storage_.SetValue(id_, val);
+}
+
+
+double AssignNode::Calc() const
+{
+    double x = 0.0;
+    x = right_->Calc();
+    left_->Assign(x);
+    return x;
+}
+
+
+
 
 
 

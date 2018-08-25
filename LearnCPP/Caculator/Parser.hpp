@@ -12,6 +12,7 @@
 // 前向声明
 class Scanner;
 class Node;
+class Calc;
 
 enum STATUS
 {
@@ -46,7 +47,7 @@ enum STATUS
  */
 class Parser {
 public:
-    Parser(Scanner& scanner);
+    Parser(Scanner& scanner, Calc& calc);
     ~Parser();
     STATUS Parse();
     // 对表达式进行解析
@@ -56,6 +57,7 @@ public:
     double Calculate() const;
 private:
     Scanner& scanner_;  // 这里如果不是引用，就是组合关系了
+    Calc& calc_;
     Node* tree_;
     STATUS status_;
 };

@@ -10,10 +10,12 @@
 #include <string>
 #include "Scanner.hpp"
 #include "Parser.hpp"
+#include "Calc.hpp"
 
 int main(void)
 {
-    STATUS status;
+    Calc calc;
+    STATUS status = STATUS_OK;
     do
     {
         std::cout<<"> ";
@@ -23,7 +25,7 @@ int main(void)
         Scanner scanner(buf);
         if (!scanner.IsEmpty())
         {
-            Parser parser(scanner);
+            Parser parser(scanner, calc);
             status = parser.Parse();
             if (status == STATUS_OK)
             {
@@ -33,7 +35,6 @@ int main(void)
             {
                 std::cout<<"Syntax Error."<<std::endl;
             }
-            
         }
         else
         {
