@@ -6,10 +6,12 @@
 //  Copyright © 2018年 HansonStudio. All rights reserved.
 //
 
-#include "FunctionTable.hpp"
 #include <cmath>
-#include "SymbolTable.hpp"
 #include <iostream>
+#include "FunctionTable.hpp"
+#include "SymbolTable.hpp"
+//#include "Debug.hpp"
+
 
 struct FunctionEntry
 {

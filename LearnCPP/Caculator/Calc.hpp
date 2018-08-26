@@ -9,9 +9,9 @@
 #ifndef Calc_hpp
 #define Calc_hpp
 
+#include <string>
 #include "SymbolTable.hpp"
 #include "Storage.hpp"
-#include <string>
 #include "FunctionTable.hpp"
 
 class Parser;

@@ -8,6 +8,7 @@
 
 #ifndef Scanner_hpp
 #define Scanner_hpp
+
 #include <string>
 
 enum EToken

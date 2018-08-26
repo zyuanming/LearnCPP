@@ -12,6 +12,7 @@
 		1F29AD5921314B75006F1A44 /* Calc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F29AD5721314B75006F1A44 /* Calc.cpp */; };
 		1F29AD5C213159FE006F1A44 /* FunctionTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F29AD5A213159FE006F1A44 /* FunctionTable.cpp */; };
 		1F51BFAD2131A01700625908 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F51BFAB2131A01700625908 /* Exception.cpp */; };
+		1F73A2EA2132D435009E7371 /* Tracer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F73A2E82132D435009E7371 /* Tracer.cpp */; };
 		6015133A211567A30082F8BA /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60151334211567A30082F8BA /* Node.cpp */; };
 		6015133B211567A30082F8BA /* Scanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60151335211567A30082F8BA /* Scanner.cpp */; };
 		6015133C211567A30082F8BA /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60151338211567A30082F8BA /* Parser.cpp */; };
@@ -41,6 +42,9 @@
 		1F29AD5B213159FE006F1A44 /* FunctionTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FunctionTable.hpp; sourceTree = "<group>"; };
 		1F51BFAB2131A01700625908 /* Exception.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Exception.cpp; sourceTree = "<group>"; };
 		1F51BFAC2131A01700625908 /* Exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Exception.hpp; sourceTree = "<group>"; };
+		1F73A2E82132D435009E7371 /* Tracer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tracer.cpp; sourceTree = "<group>"; };
+		1F73A2E92132D435009E7371 /* Tracer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tracer.hpp; sourceTree = "<group>"; };
+		1F73A2EB2132FDA8009E7371 /* Debug.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Debug.hpp; sourceTree = "<group>"; };
 		60151333211567A30082F8BA /* Parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
 		60151334211567A30082F8BA /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		60151335211567A30082F8BA /* Scanner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scanner.cpp; sourceTree = "<group>"; };
@@ -90,6 +94,9 @@
 				1F29AD5B213159FE006F1A44 /* FunctionTable.hpp */,
 				1F51BFAB2131A01700625908 /* Exception.cpp */,
 				1F51BFAC2131A01700625908 /* Exception.hpp */,
+				1F73A2E82132D435009E7371 /* Tracer.cpp */,
+				1F73A2E92132D435009E7371 /* Tracer.hpp */,
+				1F73A2EB2132FDA8009E7371 /* Debug.hpp */,
 			);
 			path = Caculator;
 			sourceTree = "<group>";
@@ -166,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F73A2EA2132D435009E7371 /* Tracer.cpp in Sources */,
 				1F29AD5C213159FE006F1A44 /* FunctionTable.cpp in Sources */,
 				6015133B211567A30082F8BA /* Scanner.cpp in Sources */,
 				1F29AD5921314B75006F1A44 /* Calc.cpp in Sources */,

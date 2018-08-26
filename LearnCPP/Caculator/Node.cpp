@@ -6,12 +6,13 @@
 //  Copyright © 2018 HansonStudio. All rights reserved.
 //
 
-#include "Node.hpp"
 #include <iostream>
 #include <cmath>
 #include <vector>
 #include <cassert>
+#include "Node.hpp"
 #include "Storage.hpp"
+#include "Debug.hpp"
 
 double NumberNode::Calc() const
 {

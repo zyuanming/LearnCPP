@@ -6,13 +6,15 @@
 //  Copyright © 2018 HansonStudio. All rights reserved.
 //
 
+#include <cassert>
+#include <iostream>
 #include "Parser.hpp"
 #include "Scanner.hpp"
 #include "Calc.hpp"
 #include "Node.hpp"
-#include <cassert>
-#include <iostream>
 #include "Exception.hpp"
+#include "Debug.hpp"
+
 
 Parser::Parser(Scanner& scanner, Calc& calc) : scanner_(scanner), calc_(calc), tree_(0), status_(STATUS_OK)
 {

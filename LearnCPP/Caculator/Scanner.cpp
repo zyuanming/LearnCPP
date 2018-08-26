@@ -6,9 +6,10 @@
 //  Copyright © 2018 HansonStudio. All rights reserved.
 //
 
-#include "Scanner.hpp"
 #include <cctype>
 #include <iostream>
+#include "Scanner.hpp"
+
 
 Scanner::Scanner(const std::string& buf) : buf_(buf), curPos_(0), number_(0)
 {

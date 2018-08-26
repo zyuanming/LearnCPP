@@ -6,10 +6,10 @@
 //  Copyright © 2018年 HansonStudio. All rights reserved.
 //
 
-#include "Storage.hpp"
-#include "SymbolTable.hpp"
 #include <cmath>
 #include <iostream>
+#include "Storage.hpp"
+#include "SymbolTable.hpp"
 
 Storage::Storage(SymbolTable& tbl)
 {

@@ -9,10 +9,9 @@
 #ifndef Node_hpp
 #define Node_hpp
 
-#include "FunctionTable.hpp"
 #include <vector>
 #include <cassert>
-
+#include "FunctionTable.hpp"
 
 class Storage;
 

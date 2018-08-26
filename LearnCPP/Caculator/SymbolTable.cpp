@@ -6,9 +6,9 @@
 //  Copyright © 2018年 HansonStudio. All rights reserved.
 //
 
-#include "SymbolTable.hpp"
 #include <algorithm>
 #include <iostream>
+#include "SymbolTable.hpp"
 #include "Exception.hpp"
 
 unsigned int SymbolTable::Add(const std::string& str)
