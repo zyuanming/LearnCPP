@@ -40,6 +40,9 @@ int main(void)
             } catch (Exception& e) {
                 status = STATUS_QUIT;
                 std::cout<<e.what()<<std::endl;
+            } catch (std::bad_alloc& e) {
+                status = STATUS_QUIT;
+                std::cout<<e.what()<<std::endl;
             } catch(...) {
                 status = STATUS_QUIT;
                 std::cout<<"Internal error."<<std::endl;
