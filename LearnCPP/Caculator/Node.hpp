@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <cassert>
+#include <memory>
 #include "FunctionTable.hpp"
 
 class Storage;
@@ -62,28 +63,32 @@ private:
 class BinaryNode : public Node
 {
 public:
-    BinaryNode(Node* left, Node* right) : left_(left), right_(right) {}
+//    BinaryNode(Node* left, Node* right) : left_(left), right_(right) {}
+    BinaryNode(std::auto_ptr<Node>& left, std::auto_ptr<Node>& right) : left_(left), right_(right) {}
     ~BinaryNode();
 protected:
-    Node* const left_;
-    Node* const right_;
+//    Node* const left_;
+//    Node* const right_;
+    std::auto_ptr<Node> left_;
+    std::auto_ptr<Node> right_;
 };
 
 
 class UnaryNode : public Node
 {
 public:
-    UnaryNode(Node* child) : child_(child) {}
+//    UnaryNode(Node* child) : child_(child) {}
+    UnaryNode(std::auto_ptr<Node>& child) : child_(child) {}
     ~UnaryNode();
 protected:
-    Node* const child_;
+    std::auto_ptr<Node> child_;
 };
 
 
 class FunctionNode : public UnaryNode
 {
 public:
-    FunctionNode(Node* child, PtrFun pFun) : UnaryNode(child), pFun_(pFun) {}
+    FunctionNode(std::auto_ptr<Node>& child, PtrFun pFun) : UnaryNode(child), pFun_(pFun) {}
     double Calc() const;
 private:
     PtrFun pFun_;
@@ -95,7 +100,7 @@ private:
 class AddNode : public BinaryNode
 {
 public:
-    AddNode(Node* left, Node* right) : BinaryNode(left, right) {}
+    AddNode(std::auto_ptr<Node>& left, std::auto_ptr<Node>& right) : BinaryNode(left, right) {}
     double Calc() const;
 };
 
@@ -104,7 +109,7 @@ public:
 class SubNode : public BinaryNode
 {
 public:
-    SubNode(Node* left, Node* right) : BinaryNode(left, right) {}
+    SubNode(std::auto_ptr<Node>& left, std::auto_ptr<Node>& right) : BinaryNode(left, right) {}
     double Calc() const;
 };
 
@@ -113,7 +118,7 @@ public:
 class MultiplyNode : public BinaryNode
 {
 public:
-    MultiplyNode(Node* left, Node* right) : BinaryNode(left, right) {}
+    MultiplyNode(std::auto_ptr<Node>& left, std::auto_ptr<Node>& right) : BinaryNode(left, right) {}
     double Calc() const;
 };
 
@@ -121,7 +126,7 @@ public:
 class DivideNode : public BinaryNode
 {
 public:
-    DivideNode(Node* left, Node* right) : BinaryNode(left, right) {}
+    DivideNode(std::auto_ptr<Node>& left, std::auto_ptr<Node>& right) : BinaryNode(left, right) {}
     double Calc() const;
 };
 
@@ -129,7 +134,7 @@ public:
 class UMinusNode : public UnaryNode
 {
 public:
-    UMinusNode(Node* child) : UnaryNode(child) {}
+    UMinusNode(std::auto_ptr<Node>& child) : UnaryNode(child) {}
     double Calc() const;
 };
 
@@ -138,13 +143,13 @@ public:
 class MultipleNode : public Node
 {
 public:
-    MultipleNode(Node* node)
+    MultipleNode(std::auto_ptr<Node>& node)
     {
         AppendChild(node, true);
     }
-    void AppendChild(Node* node, bool positive)
+    void AppendChild(std::auto_ptr<Node>& node, bool positive)
     {
-        childs_.push_back(node);
+        childs_.push_back(node.release());
         positives_.push_back(positive);
     }
     ~MultipleNode();
@@ -157,7 +162,7 @@ protected:
 class SumNode: public MultipleNode
 {
 public:
-    SumNode(Node* node) : MultipleNode(node) {}
+    SumNode(std::auto_ptr<Node>& node) : MultipleNode(node) {}
     double Calc() const;
 };
 
@@ -165,7 +170,7 @@ public:
 class ProductNode: public MultipleNode
 {
 public:
-    ProductNode(Node* node) : MultipleNode(node) {}
+    ProductNode(std::auto_ptr<Node>& node) : MultipleNode(node) {}
     double Calc() const;
 };
 
@@ -185,7 +190,7 @@ private:
 class AssignNode : public BinaryNode
 {
 public:
-    AssignNode(Node* left, Node* right) : BinaryNode(left, right) {
+    AssignNode(std::auto_ptr<Node>& left, std::auto_ptr<Node>& right) : BinaryNode(left, right) {
         assert(left->IsLvalue());
     }
     double Calc() const;

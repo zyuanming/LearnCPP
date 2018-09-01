@@ -36,9 +36,9 @@ STATUS Parser::Parse()
     return status_;
 }
 
-Node* Parser::Expr()
+std::auto_ptr<Node> Parser::Expr()
 {
-    Node* node = Term();
+    std::auto_ptr<Node> node = Term();
     EToken token = scanner_.Token();
     
     
@@ -58,11 +58,12 @@ Node* Parser::Expr()
     
     if (token == TOKEN_PLUS || token == TOKEN_MINUS)
     {
-        MultipleNode* multipleNode = new SumNode(node);
+//        MultipleNode* multipleNode = new SumNode(node);
+        std::auto_ptr<MultipleNode> multipleNode(new SumNode(node));
         do
         {
             scanner_.Accept();
-            Node* nextNode = Term();
+            std::auto_ptr<Node> nextNode = Term();
             multipleNode->AppendChild(nextNode, token == TOKEN_PLUS);
             token = scanner_.Token();
         } while(token == TOKEN_PLUS || token == TOKEN_MINUS);
@@ -73,9 +74,9 @@ Node* Parser::Expr()
     {
         // Expr := Term = Expr
         scanner_.Accept();
-        Node* nodeRight = Expr();
+        std::auto_ptr<Node> nodeRight = Expr();
         if (node->IsLvalue()) {
-            node = new AssignNode(node, nodeRight);
+            node = std::auto_ptr<Node>(new AssignNode(node, nodeRight));
         } else {
             status_ = STATUS_ERROR;
 //            std::cout<<"The left-hand side of an assignment must be a variable"<<std::endl;
@@ -87,9 +88,9 @@ Node* Parser::Expr()
     return node;
 }
 
-Node* Parser::Term()
+std::auto_ptr<Node> Parser::Term()
 {
-    Node* node = Factor();
+    std::auto_ptr<Node> node = Factor();
     EToken token = scanner_.Token();
 //    if (token == TOKEN_MULTIPLY)
 //    {
@@ -106,11 +107,13 @@ Node* Parser::Term()
     
     if (token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE)
     {
-        MultipleNode* multipleNode = new ProductNode(node);
+//        MultipleNode* multipleNode = new ProductNode(node);
+        std::auto_ptr<MultipleNode> multipleNode(new ProductNode(node));
+        
         do
         {
             scanner_.Accept();
-            Node* nextNode = Factor();
+            std::auto_ptr<Node> nextNode = Factor();
             multipleNode->AppendChild(nextNode, token == TOKEN_MULTIPLY);
             token = scanner_.Token();
         } while(token == TOKEN_MULTIPLY || token == TOKEN_DIVIDE);
@@ -122,9 +125,9 @@ Node* Parser::Term()
     return node;
 }
 
-Node* Parser::Factor()
+std::auto_ptr<Node> Parser::Factor()
 {
-    Node* node = 0;
+    std::auto_ptr<Node> node;
     EToken token = scanner_.Token();
     if (token == TOKEN_LPARENTHESIS)
     {
@@ -142,7 +145,7 @@ Node* Parser::Factor()
     }
     else if (token == TOKEN_NUMBER)
     {
-        node = new NumberNode(scanner_.Number());
+        node = std::auto_ptr<Node>(new NumberNode(scanner_.Number()));
         scanner_.Accept();
     }
     else if (token == TOKEN_IDENTIFIER)
@@ -160,7 +163,7 @@ Node* Parser::Factor()
                 
                 if (id != SymbolTable::IDNOTFOUND && calc_.IsFunction(id))
                 {
-                    node = new FunctionNode(node, calc_.GetFunction(id));
+                    node = std::auto_ptr<Node>(new FunctionNode(node, calc_.GetFunction(id)));
                 }
                 else
                 {
@@ -182,13 +185,17 @@ Node* Parser::Factor()
                 id = calc_.AddSymbol(symbol);
             }
             
-            node = new VariableNode(id, calc_.GetStorage());
+            node = std::auto_ptr<Node>(new VariableNode(id, calc_.GetStorage()));
         }
     }
     else if (token == TOKEN_MINUS)
     {
         scanner_.Accept();
-        node = new UMinusNode(Factor());
+        // if write : std::auto_ptr<Node>(new UMinusNode(Factor()));
+        // will compile error.
+        // i have no idea why.
+        std::auto_ptr<Node> tmpNode = Factor();
+        node = std::auto_ptr<Node>(new UMinusNode(tmpNode));
     }
     else {
         status_ = STATUS_ERROR;
@@ -200,7 +207,7 @@ Node* Parser::Factor()
 double Parser::Calculate() const
 {
 //    assert(tree_ != 0);
-    if (tree_ == 0) {
+    if (tree_.get() == 0) {
         std::cout<<"some thing wrong.."<<std::endl;
         return -1;
     } else {

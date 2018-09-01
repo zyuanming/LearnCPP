@@ -9,6 +9,7 @@
 #ifndef Parser_hpp
 #define Parser_hpp
 
+#include <memory>
 // 前向声明
 class Scanner;
 class Node;
@@ -51,14 +52,14 @@ public:
     ~Parser();
     STATUS Parse();
     // 对表达式进行解析
-    Node* Expr();
-    Node* Term();
-    Node* Factor();
+    std::auto_ptr<Node> Expr();
+    std::auto_ptr<Node> Term();
+    std::auto_ptr<Node> Factor();
     double Calculate() const;
 private:
     Scanner& scanner_;  // 这里如果不是引用，就是组合关系了
     Calc& calc_;
-    Node* tree_;
+    std::auto_ptr<Node> tree_;
     STATUS status_;
 };
 
